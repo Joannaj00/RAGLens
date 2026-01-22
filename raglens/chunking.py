@@ -7,7 +7,7 @@ def chunk_docs_fixed(docs, chunk_size=1000, chunk_overlap=150):
         chunk_overlap=chunk_overlap
     )
     chunks = splitter.split_documents(docs)
-    or i, c in enumerate(chunks):
+    for i, c in enumerate(chunks):
         c.metadata["chunk_id"] = i # to refer to later
     return chunks
 

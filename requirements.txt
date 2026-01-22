@@ -1,8 +1,9 @@
+datasets
 langchain
 langchain-core
+langchain-text-splitters
 langchain-community
-pypdf
-pymupdf
-sentence-transformers
+langchain-openai
 faiss-cpu
-chromadb
+pyyaml
+tqdm
