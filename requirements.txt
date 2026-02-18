@@ -1,0 +1,24 @@
+# Core RAG dependencies
+datasets
+langchain
+langchain-core
+langchain-text-splitters
+langchain-community
+langchain-openai
+langchain-huggingface
+sentence-transformers
+faiss-cpu
+pyyaml
+tqdm
+
+# Evaluation
+bert-score
+
+# Dashboard / visualization
+streamlit
+plotly
+pandas
+
+# Web API backend
+fastapi
+uvicorn[standard]

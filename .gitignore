@@ -1,0 +1,7 @@
+<<<<<<< HEAD
+data/.env
+=======
+data/
+.env
+>>>>>>> 711b5bf (evaluation + visualization)
+.env
