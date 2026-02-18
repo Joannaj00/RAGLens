@@ -1,6 +1,7 @@
 # conda activate raglens
 # conda install -c conda-forge faiss-cpu -y
 # pip install -r requirements.txt
+# python3 -m raglens.rag_baseline
 
 from raglens.ingest import load_jsonl
 from raglens.chunking import chunk_docs_fixed, chunk_docs_recursive
