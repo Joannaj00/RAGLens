@@ -57,6 +57,18 @@ DATA_PATH = str(_ROOT / "data" / "raw" / "docs.jsonl")
 
 app = FastAPI(title="RAGLens API", version="1.0.0")
 
+# Pre-build the default pipeline in the background at startup so the first
+# user query is instant instead of waiting 2–3 minutes for index construction.
+@app.on_event("startup")
+async def warm_up():
+    import threading
+    def _build():
+        try:
+            _get_pipeline("recursive", 1000, 150)
+        except Exception as e:
+            print(f"[warm-up] pipeline build failed: {e}")
+    threading.Thread(target=_build, daemon=True).start()
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
