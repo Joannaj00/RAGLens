@@ -1,0 +1,33 @@
+# fly.toml — RAGLens FastAPI backend
+#
+# Before deploying:
+#   1. fly auth login
+#   2. fly apps create raglens-api   (or choose your own name)
+#   3. fly secrets set OPENAI_KEY=<your-key>
+#   4. fly deploy
+
+app = "raglens-api"
+primary_region = "iad"  # US East — change to "lhr" (London) or "nrt" (Tokyo) if preferred
+
+[build]
+  dockerfile = "Dockerfile"
+
+[http_service]
+  internal_port = 8000
+  force_https = true
+  auto_stop_machines = "stop"   # machine stops after ~5min idle (saves cost)
+  auto_start_machines = true    # wakes automatically on incoming request
+  min_machines_running = 0      # set to 1 if you want zero cold starts (always-on)
+  processes = ["app"]
+
+  [[http_service.checks]]
+    grace_period = "60s"   # give uvicorn + model load time to finish
+    interval = "30s"
+    method = "GET"
+    path = "/api/configs"
+    timeout = "10s"
+
+[[vm]]
+  memory = "4gb"
+  cpu_kind = "shared"
+  cpus = 2

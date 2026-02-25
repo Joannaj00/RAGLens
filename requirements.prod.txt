@@ -1,0 +1,17 @@
+# Production-only requirements for the FastAPI backend.
+# Strips out offline-only tools (streamlit, plotly, bert-score, datasets)
+# that are heavy and unused at runtime.
+
+# Core RAG
+langchain
+langchain-core
+langchain-text-splitters
+langchain-community
+langchain-huggingface
+sentence-transformers
+faiss-cpu
+pyyaml
+
+# Web API
+fastapi
+uvicorn[standard]

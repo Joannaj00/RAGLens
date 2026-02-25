@@ -1,0 +1,31 @@
+# Version control
+.git/
+.gitignore
+
+# Frontend (deployed separately to Cloudflare Pages / Vercel)
+raglens-ui/
+
+# Python environments
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Dev/offline scripts (not needed in the API container)
+scripts/
+notebook/
+
+# Local secrets (set via fly secrets instead)
+.env
+
+# Claude Code
+.claude/
+
+# Misc
+*.md
+uv.lock
+pyproject.toml
+main.py
+requirements.txt
+requirements.no_faiss.txt
