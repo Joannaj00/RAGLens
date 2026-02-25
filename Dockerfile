@@ -10,7 +10,7 @@ WORKDIR /app
 # Install CPU-only PyTorch first. The default `torch` from PyPI bundles CUDA
 # binaries (~5GB uncompressed) that are useless on a CPU-only server.
 # This must come before requirements.prod.txt so sentence-transformers reuses it.
-RUN pip install --no-cache-dir torch --index-url https://download.pytorch.org/whl/cpu
+RUN pip install --no-cache-dir "torch==2.1.2" --index-url https://download.pytorch.org/whl/cpu
 
 # Install remaining dependencies
 COPY requirements.prod.txt .
