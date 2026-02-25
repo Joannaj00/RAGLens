@@ -1,5 +1,6 @@
 "use client"
 import Link from "next/link"
+import Image from "next/image"
 import { usePathname } from "next/navigation"
 
 const links = [
@@ -13,7 +14,10 @@ export default function NavBar() {
   const pathname = usePathname()
   return (
     <nav className="bg-slate-900 text-white px-6 py-4 flex items-center gap-8 shadow-md">
-      <span className="font-bold text-lg tracking-tight text-blue-400">🔍 RAGLens</span>
+      <div className="flex items-center gap-2">
+        <Image src="/logo.png" alt="RAGLens logo" width={36} height={36} />
+        <span className="font-bold text-lg tracking-tight text-blue-400">RAGLens</span>
+      </div>
       <div className="flex gap-6">
         {links.map(({ href, label }) => (
           <Link

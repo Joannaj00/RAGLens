@@ -43,7 +43,8 @@ def _load_env(path: Path) -> None:
 
 _ROOT = Path(__file__).resolve().parent.parent
 _load_env(_ROOT / ".env")
-_raw_key = os.environ.get("OPENAI-KEY", "")
+# Accept both OPENAI-KEY (local .env) and OPENAI_KEY (Fly.io secrets, which disallow hyphens)
+_raw_key = os.environ.get("OPENAI-KEY", "") or os.environ.get("OPENAI_KEY", "")
 if _raw_key:
     os.environ["OPENAI_API_KEY"] = _raw_key
 
@@ -58,7 +59,11 @@ app = FastAPI(title="RAGLens API", version="1.0.0")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=[
+        "http://localhost:3000",
+        "https://rag-lens.com",
+        "https://www.rag-lens.com",
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
