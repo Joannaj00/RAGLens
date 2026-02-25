@@ -5,6 +5,7 @@ import NavBar from "@/components/NavBar"
 export const metadata: Metadata = {
   title: "RAGLens",
   description: "RAG Pipeline Evaluation Dashboard",
+  icons: { icon: "/favicon.svg" },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
