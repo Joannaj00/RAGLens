@@ -12,7 +12,8 @@
       "Bash(npx tsc:*)",
       "Bash(git add:*)",
       "Bash(git restore:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(git remote:*)"
     ]
   }
 }
