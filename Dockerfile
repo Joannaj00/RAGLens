@@ -5,19 +5,21 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libgomp1 \
     && rm -rf /var/lib/apt/lists/*
 
+# uv is a fast Rust-based package installer (10-100x faster than pip)
+RUN pip install --no-cache-dir uv
+
 WORKDIR /app
 
 # Install CPU-only PyTorch first. The default `torch` from PyPI bundles CUDA
 # binaries (~5GB uncompressed) that are useless on a CPU-only server.
-# This must come before requirements.prod.txt so sentence-transformers reuses it.
-RUN pip install --no-cache-dir "torch==2.1.2" --index-url https://download.pytorch.org/whl/cpu
+RUN uv pip install --system --no-cache "torch==2.1.2" \
+    --index-url https://download.pytorch.org/whl/cpu
 
 # Install remaining dependencies
 COPY requirements.prod.txt .
-RUN pip install --no-cache-dir -r requirements.prod.txt
+RUN uv pip install --system --no-cache -r requirements.prod.txt
 
 # Pre-download the embedding model into the image so cold starts are instant.
-# Without this, first request downloads ~400MB from HuggingFace at runtime.
 RUN python -c "from sentence_transformers import SentenceTransformer; SentenceTransformer('intfloat/e5-base-v2')"
 
 # Copy application code and pre-computed data
